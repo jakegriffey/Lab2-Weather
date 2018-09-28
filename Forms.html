@@ -30,6 +30,29 @@
                     });
                 });
                 
+                $("#searchButton").click( function(e) {
+                    let value = $("#stackoverflowField").val();
+                    e.preventDefault()
+                    
+                    var myURL = "https://api.stackexchange.com/2.2/search?order=desc&sort=activity&intitle=";
+                    myURL += value + "&site=stackoverflow";
+                    
+                    $.ajax({
+                        url: myURL,
+                        dataType: "json",
+                        success: function(data) {
+                            //data[0][link] or [title]
+                            let items = data["items"];
+                            let everything = "<ul>";
+                            $.each(items, function(i, item) {
+                                everything += "<li class = \"sub-text\">" + "<a href = \"" + items[i].link + "\">" + items[i].title + "</a></li>";
+                            });
+                            everything += "</ul>";
+                            $("#search").html(everything);
+                        }
+                    });
+                });
+                
                 $("#weatherButton").click(function(e) {
                     let value = $("#cityField").val();
                     $("#displayCity").text(value);
@@ -61,6 +84,7 @@
                         }
                     });
                 });
+                
             });
         </script>
     </head>
@@ -69,7 +93,7 @@
                <h1 class = "main-header">Weather</h1> 
         </div>
         <div class = "container-fluid text-center greenbackground">
-            <form>
+            <form autocomplete = "off">
                 <input type="text" id="cityField" value="" class = "black-text"><br>
                 <span id="txtHint"></span>
                 <input id="weatherButton" type="submit" value="Submit" class = "black-text">
@@ -84,6 +108,17 @@
             <div id="weather">No weather</div>
         </div>
         
+        <div class = "container-fluid text-center orangebackground">
+            <h2 class = "subheader">Search Stackoverflow</h2>
+            <br>
+            <br>
+            <form autocomplete = "off">
+                <input type = "text" id = "stackoverflowField" value = "" class = "black-text">
+                <input id = "searchButton" type= "submit" value = "Search" class = "black-text"> 
+            </form>
+            <div id = "search" class = "text-left"></div>
+            
+        </div>
         
     </body>
 </html>

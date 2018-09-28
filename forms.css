@@ -15,8 +15,11 @@
     padding-bottom:50px;
 }
 
-.blackbackground {
-    background-color: #575a60;
+.orangebackground {
+    background-color: #f2c73a;
+    color: white;
+    padding-top: 50px;
+    padding-bottom:50px;
 }
 
 .bluebackground {
@@ -41,6 +44,11 @@
     padding-top: 75px;
     font-size: 132px;
     color: black;
+    font-family: WithoutRain;
+}
+
+.subheader {
+    font-size: 32px;
     font-family: WithoutRain;
 }
 
